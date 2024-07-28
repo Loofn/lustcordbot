@@ -1,3 +1,5 @@
+const { ApplicationCommandType } = require("discord.js");
+
 module.exports = {
     name: 'bump',
     description: 'Bump the server in the Lustcord serverlist.',
@@ -12,7 +14,7 @@ module.exports = {
         } = interaction; 
         const { guild } = member;
 
-        
+
 
     }
 }
