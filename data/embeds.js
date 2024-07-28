@@ -16,9 +16,15 @@ const mustVerify = new EmbedBuilder()
     .setDescription(`Please age verify yourself first using command \`/ageverify\`.`)
     .setColor("Red");
 
+const botLacksPerms = new EmbedBuilder()
+    .setTitle(`Oop...`)
+    .setDescription(`Unfortunately I am missing permissions to do this action, make sure I have correct permissions.`)
+    .setColor("Red");
+
 
 module.exports = {
     noPerms,
+    botLacksPerms,
     cantPunishStaff,
     mustVerify
 }
