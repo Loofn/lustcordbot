@@ -1,10 +1,7 @@
 const { EmbedBuilder, ApplicationCommandType, MessageFlags, roleMention, Embed } = require('discord.js');
 const { isMod, isAdmin } = require('../../function/roles');
 const { noPerms } = require('../../data/embeds');
-const serverRoles = require('../../data/serverRoles.json');
 const serverChannels = require('../../data/channels.json');
-const { restoreUserRoles, saveUserRoles } = require('../../function/userRoles');
-const { addModlog } = require('../../function/modlog');
 
 module.exports = {
     name: 'Purge after this message',
