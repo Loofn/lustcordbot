@@ -8,14 +8,14 @@ client.on('messageCreate', async message => {
         var regex = /\b\d+\s*fahrenheit\b/i;
         var match = message.content.match(regex);
         var number = parseFloat(match[0])
-        message.reply(`That is **${convertF(number)}°C** for you non-americans <:blush_blep:1236762311910494259>`)
+        message.reply(`That is **${convertF(number)}°C** for you non-americans`)
     }
 
     if(celcius(message.content)){
         var regex = /\b\d+\s*celcius\b/i;
         var match = message.content.match(regex);
         var number = parseFloat(match[0])
-        message.reply(`That is **${convertC(number)}°F** for you patriotic gun-heads <:neko_annoyed:1236763357638426727>`)
+        message.reply(`That is **${convertC(number)}°F** for you patriotic gun-heads`)
     }
 })
 
