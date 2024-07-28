@@ -5,7 +5,7 @@ module.exports = {
     description: 'Bump the server in the Lustcord serverlist.',
     cooldown: 3000,
     type: ApplicationCommandType.ChatInput,
-    scope: 'global',
+    scope: 'dev',
 
     run: async (client, interaction) => {
         const { member, channelId, guildId, applicationId, 

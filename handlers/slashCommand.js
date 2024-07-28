@@ -18,6 +18,7 @@ const DEBUG_MODE = true;
 module.exports = (client) => {
     const globalCommands = [];
     const guildCommands = [];
+    const devCommands = [];
 
     fs.readdirSync('./slashCommands/').forEach(async dir => {
         const files = fs.readdirSync(`./slashCommands/${dir}/`).filter(file => file.endsWith('.js'));
@@ -36,6 +37,8 @@ module.exports = (client) => {
 
                 if(slashCommand.scope === 'global'){
                     globalCommands.push(commandData);
+                } else if(slashCommand.scope === 'dev'){
+                    devCommands.push(commandData);
                 } else {
                     guildCommands.push(commandData);
                 }
@@ -56,9 +59,15 @@ module.exports = (client) => {
 
     (async () => {
         try {
+            const existingCommands = await rest.get(Routes.applicationGuildCommands(CLIENT_ID, GUILD_ID));
+                for (const cmd of existingCommands) {
+                    await rest.delete(Routes.applicationGuildCommand(CLIENT_ID, GUILD_ID, cmd.id));
+                }
             if(DEBUG_MODE){
+                // Register only dev commands in debug mode
+                await rest.put(Routes.applicationGuildCommands(CLIENT_ID, GUILD_ID), { body: devCommands });
                 await rest.put(Routes.applicationGuildCommands(CLIENT_ID, GUILD_ID), { body: guildCommands })
-                console.log("DEBUG DEBUG, ONLY UPDATING COMMANDS TO DEV SERVER!")
+                console.log("DEBUG MODE: ONLY UPDATING DEV COMMANDS TO DEV SERVER!");
             } else {
                 await rest.put(Routes.applicationCommands(CLIENT_ID), { body: globalCommands });
                 await rest.put(Routes.applicationGuildCommands(CLIENT_ID, GUILD_ID), { body: guildCommands })
